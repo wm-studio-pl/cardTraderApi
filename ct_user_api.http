@@ -1,0 +1,63 @@
+
+POST http://ct.zobacztu.pl/test.php
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="cos"
+
+nićątko
+--WebAppBoundary
+Content-Disposition: form-data; name="email"
+
+kurna@fifek.prl
+--WebAppBoundary--
+
+###
+POST http://ct.zobacztu.pl/test.php
+Content-Type: text/plain
+
+id=99&cos=nic
+
+###
+POST http://ct.zobacztu.pl/test.php
+Content-Type: application/x-www-form-urlencoded
+
+id=99&content=new-element
+
+###
+POST http://ct.zobacztu.pl/test.php
+Content-Type: application/json
+
+{
+    "email":"nic@example.com",
+    "password": "hasielo"
+}
+
+###
+POST http://localhost:8888/api/users/register
+Content-Type: application/x-www-form-urlencoded
+
+name=franek&email=&password=hasielo&c_password=hasielo2
+
+###
+POST http://ct.zobacztu.pl/api/login
+Content-Type: application/x-www-form-urlencoded
+
+email=nic@example.com&password=hasielo
+
+###
+POST http://localhost:8888/api/users/details
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNTAwMmVhNjZiNDIxZmZlM2YwMDNhYTdlOTVlMDMwMjAxMDE4NjNlOGEyYjNkNDkxNjM1NDRhZTgxZDM5M2MyOTk0OGQ5ZmQ3NTkwNTk2NTMiLCJpYXQiOjE1ODc3MTIzOTksIm5iZiI6MTU4NzcxMjM5OSwiZXhwIjoxNjE5MjQ4Mzk5LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.v0NDuSFQTCz_BFlNtvug5fpQ3WuW2lWRvqSye3Re76MGDMc2zF9suVLylaq9pU2ZE5E5sEtEeBRQlDm5kVsrDUzUo7bqcF5RzfDW1-dM_-rVGjhaTa4iTOmnXz-zXEJC-SFS6Qg1evIMq88tFCoWOOx30D0VPbOZ8hHyOnNQiSlPIuUszK4TIAiM69btARd8ArEDUyGLVt8BuxjWwLQ1TP85BHcFfEQJQ4VMfL2KM--GbzNwYim4iyN_XJVwhBPdwOVWXfax3FtMIDh5lrEEuk-P2rV1WnakHfos3wXe5JIF5jH0nRZ9WK1t9BGRsfA8-MjCbiISrxV2hyyvvN3eQM0XPxcatPnJmydPcz0QBztbXlWJG9-5q5LuRDtyqQ9vOMZOFxyArKkRtJHc0urXL1rGlretnaKPdv9uARRuZj9SEAGEitBqE1csAilMHiwruCeITC4ouMMqOVf79v5dE2cy3sHhdbG1Q1FZX1Hq68JZUyz1NT-Vb3XX6o_q8p9nBUIAhxvP0tRo_kDOLZ1gWET_bfFzrN2q31wCpK24ltyo5eiRrZ2AJjHTR53UtagtACT-RM2we4n2x7SduJcjJoc4hQ30IiNIoHeyOlhuI3w_INtMobWf2N_Cu2Ugqt8bU88-cseUl78lN_YCw0gdI24BvkY2KaoJRSQnD2sDtyg
+
+###
+POST http://ct.zobacztu.pl/api/users/register
+Content-Type: application/x-www-form-urlencoded
+
+name=zdzisław&email=nic@example.com&password=hasielo&c_password=hasielo
+
+###
+
+POST http://ct.zobacztu.pl/api/users/details
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNTAwMmVhNjZiNDIxZmZlM2YwMDNhYTdlOTVlMDMwMjAxMDE4NjNlOGEyYjNkNDkxNjM1NDRhZTgxZDM5M2MyOTk0OGQ5ZmQ3NTkwNTk2NTMiLCJpYXQiOjE1ODc3MTIzOTksIm5iZiI6MTU4NzcxMjM5OSwiZXhwIjoxNjE5MjQ4Mzk5LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.v0NDuSFQTCz_BFlNtvug5fpQ3WuW2lWRvqSye3Re76MGDMc2zF9suVLylaq9pU2ZE5E5sEtEeBRQlDm5kVsrDUzUo7bqcF5RzfDW1-dM_-rVGjhaTa4iTOmnXz-zXEJC-SFS6Qg1evIMq88tFCoWOOx30D0VPbOZ8hHyOnNQiSlPIuUszK4TIAiM69btARd8ArEDUyGLVt8BuxjWwLQ1TP85BHcFfEQJQ4VMfL2KM--GbzNwYim4iyN_XJVwhBPdwOVWXfax3FtMIDh5lrEEuk-P2rV1WnakHfos3wXe5JIF5jH0nRZ9WK1t9BGRsfA8-MjCbiISrxV2hyyvvN3eQM0XPxcatPnJmydPcz0QBztbXlWJG9-5q5LuRDtyqQ9vOMZOFxyArKkRtJHc0urXL1rGlretnaKPdv9uARRuZj9SEAGEitBqE1csAilMHiwruCeITC4ouMMqOVf79v5dE2cy3sHhdbG1Q1FZX1Hq68JZUyz1NT-Vb3XX6o_q8p9nBUIAhxvP0tRo_kDOLZ1gWET_bfFzrN2q31wCpK24ltyo5eiRrZ2AJjHTR53UtagtACT-RM2we4n2x7SduJcjJoc4hQ30IiNIoHeyOlhuI3w_INtMobWf2N_Cu2Ugqt8bU88-cseUl78lN_YCw0gdI24BvkY2KaoJRSQnD2sDtyg
+
+###
