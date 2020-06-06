@@ -9,10 +9,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\User as UserResource;
 
 class UserController extends Controller
 {
     public $successStatus = 200;
+    public const TEXT_DATA_CONTAINER = 'data';
 
     public function login(Request $request)
     {
@@ -20,7 +22,7 @@ class UserController extends Controller
         {
             $user = Auth::user();
             $success['token'] = $user->createToken('cardTrader')->accessToken;
-            return response()->json(['success'=>$success], $this->successStatus);
+            return response()->json([self::TEXT_DATA_CONTAINER=>$success], $this->successStatus);
         }
         else
             {
@@ -45,23 +47,24 @@ class UserController extends Controller
         $input['password'] = bcrypt($input['password']);
         $testUser = User::where('email', '=', $input['email'])->first();
         if (!empty($testUser)) {
-            return response()->json(['error'=>'User with this email already exists'], 409);
+            return response()->json(['error'=>['email'=>'User with this email already exists']], 409);
         }
         $user = User::create($input);
         $success['token'] = $user->createToken('cardTrader')->accessToken;
         $success['name'] = $user->name;
-        return response()->json(['success'=>$success], $this->successStatus);
+        return response()->json([self::TEXT_DATA_CONTAINER=>$success], $this->successStatus);
     }
 
     public function details()
     {
         $user = Auth::user();
-        return response()->json(['success'=>$user], $this->successStatus);
+        return new UserResource($user);
+        //return response()->json([self::TEXT_DATA_CONTAINER=>$user], $this->successStatus);
     }
 
     public function test(Request $request)
     {
-        return response()->json(['success'=>'method: '.$request->method().', params: '.print_r($request->input(), 1)]);
+        return response()->json([self::TEXT_DATA_CONTAINER=>'method: '.$request->method().', params: '.print_r($request->input(), 1) . ' i nagłówek Authorization: ' . $request->header("Authorization")]);
     }
 
 }
