@@ -23,6 +23,8 @@ Route::post('login', 'API\UserController@login')->name('login');
 Route::post('users/register', 'API\UserController@register');
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('users/details', 'API\UserController@details');
+    Route::put('users/cards/add/{id}', 'API\UserController@addCard');
+    Route::put('users/cards/sub/{id}', 'API\UserController@subCard');
 
     Route::post('categories', 'API\CategoryController@store'); //new category
     Route::put('categories', 'API\CategoryController@store'); //edit->save category

@@ -20,7 +20,7 @@ class Card extends JsonResource
             'short'=>$this->short_description,
             'description'=>$this->description,
             'category'=>$this->category,
-            'subcateogry'=>$this->subcategory,
+            'subcategory'=>$this->subcategory,
             'image'=> $this->getImageUrl($this->image),
         ];
     }

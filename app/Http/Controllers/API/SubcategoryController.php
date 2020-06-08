@@ -16,7 +16,7 @@ class SubcategoryController extends Controller
      */
     public function index()
     {
-        $subcategories = Subcategory::paginate(10);
+        $subcategories = Subcategory::all();
         return SubcategoryResource::collection($subcategories);
     }
 

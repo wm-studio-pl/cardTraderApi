@@ -5,9 +5,11 @@ namespace App\Http\Controllers\API;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Card as CardResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
+use App\Card;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\User as UserResource;
 
@@ -62,9 +64,55 @@ class UserController extends Controller
         //return response()->json([self::TEXT_DATA_CONTAINER=>$user], $this->successStatus);
     }
 
+    public function addCard(Request $request, $id)
+    {
+        $user = Auth::user();
+        if (empty($user))
+        {
+            return response()->json(['error'=>['email'=>'User with this email not exists']], 404);
+        }
+        $card = Card::findOrFail($id);
+        if (empty($card))
+            return response()->json(['error'=>['card_id'=>'Card with this id not exists']], 404);
+        $cardOwned = $user->cards->firstWhere('id','=',$id);
+        $cardsCount = $cardOwned->pivot->qty??0;
+        if (!empty($cardOwned)) {
+            $user->cards()->detach($id);
+        }
+        $user->cards()->attach($id, ['qty'=>$cardsCount+1]);
+        $user->push();
+        $user->refresh();
+        return new UserResource($user);
+    }
+
+    public function subCard(Request $request, $id)
+    {
+        $user = Auth::user();
+        if (empty($user))
+        {
+            return response()->json(['error'=>['email'=>'User with this email not exists']], 404);
+        }
+        $card = Card::findOrFail($id);
+        if (empty($card))
+            return response()->json(['error'=>['card_id'=>'Card with that id not exists']], 404);
+        $cardOwned = $user->cards->firstWhere('id','=',$id);
+        $cardsCount = $cardOwned->pivot->qty??0;
+        if ($cardsCount == 0) {
+            return response()->json(['error'=>['card_id'=>'User not have any quantity of this card']], 404);
+        }
+        $cardsCount--;
+        $user->cards()->detach($id);
+        if ($cardsCount)
+            $user->cards()->attach($id, ['qty'=>$cardsCount]);
+        $user->push();
+        $user->refresh();
+        return new UserResource($user);
+    }
+
     public function test(Request $request)
     {
         return response()->json([self::TEXT_DATA_CONTAINER=>'method: '.$request->method().', params: '.print_r($request->input(), 1) . ' i nagłówek Authorization: ' . $request->header("Authorization")]);
     }
+
 
 }
