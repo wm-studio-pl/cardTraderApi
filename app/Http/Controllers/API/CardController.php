@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Card;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Card as CardResource;
+use App\Http\Resources\User as UserResource;
+use App\User;
 use Illuminate\Http\Request;
 
 class CardController extends Controller
@@ -66,13 +68,23 @@ class CardController extends Controller
     }
 
     public function showUserCards($user_id)
-    {
-        $cards = Card::with(['category', 'subcategory', 'users'])
+    {   //@todo przenieść do serwisu wraz z metodą info w UserController
+        $user = User::findOrFail($user_id);
+        if (empty($user)) return response()->json(['error'=>['user'=>'User with this id not exists']], 404);
+        $user->email='';
+//        $user->pass
+        return new UserResource($user);
+
+        //czemu nie z usera?
+       /* $cards = Card::with(['category', 'subcategory', 'users'])
                 ->whereHas('users', function ($q) use ($user_id){
                     $q->where('user_id', $user_id);
                 }
-            )->get();
-        return CardResource::collection($cards);
+            )
+            ->get();
+
+        dd($cards);
+        return CardResource::collection($cards);*/ //tak się już nie bawimy ;)
     }
 
 

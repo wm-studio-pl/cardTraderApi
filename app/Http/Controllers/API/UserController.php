@@ -6,12 +6,14 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Card as CardResource;
+use App\Http\Resources\UserSimple;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
 use App\Card;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\User as UserResource;
+use App\Http\Resources\UserSimple as UserSimpleResource;
 
 class UserController extends Controller
 {
@@ -30,6 +32,11 @@ class UserController extends Controller
             {
                 return response()->json(['error'=>'Unauthorised'], 401);
             }
+    }
+
+    public function list() {
+        $users = User::all()->keyBy->id;
+        return UserSimpleResource::collection($users);
     }
 
     public function register(Request $request)
@@ -61,7 +68,15 @@ class UserController extends Controller
     {
         $user = Auth::user();
         return new UserResource($user);
-        //return response()->json([self::TEXT_DATA_CONTAINER=>$user], $this->successStatus);
+    }
+
+    public function info($id)
+    {
+        $user = User::findOrFail($id);
+        if (empty($user)) return response()->json(['error'=>['user'=>'User with this id not exists']], 404);
+        $user->email='';
+//        $user->pass
+        return new UserResource($user);
     }
 
     public function addCard(Request $request, $id)

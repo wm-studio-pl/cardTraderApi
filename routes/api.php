@@ -38,10 +38,14 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 Route::any('test', 'API\UserController@test');
 
+Route::get('users/list', 'API\UserController@list');
+
 Route::get('categories', 'API\CategoryController@index');
 Route::get('categories/{id}', 'API\CategoryController@show');
+
 Route::get('subcategories', 'API\SubcategoryController@index');
 Route::get('subcategories/{id}', 'API\SubcategoryController@show');
+
 Route::get('cards', 'API\CardController@index');
 Route::get('cards/{id}', 'API\CardController@show');
 Route::get('cards/u/{user_id}', 'API\CardController@showUserCards');

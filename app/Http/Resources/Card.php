@@ -6,6 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class Card extends JsonResource
 {
+    public $preserveKeys = true;
     /**
      * Transform the resource into an array.
      *
@@ -22,6 +23,9 @@ class Card extends JsonResource
             'category'=>$this->category,
             'subcategory'=>$this->subcategory,
             'image'=> $this->getImageUrl($this->image),
+            'qty' => $this->whenPivotLoaded('card_user', function () {
+                return $this->pivot->qty;
+            }),
         ];
     }
 

@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Card as CardResource;
 
-class User extends JsonResource
+class UserSimple extends JsonResource
 {
     public $preserveKeys = true;
     /**
@@ -19,8 +19,6 @@ class User extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'email' => $this->email,
-            'cards' => CardResource::collection($this->cards->keyBy->id),
         ];
     }
 }
