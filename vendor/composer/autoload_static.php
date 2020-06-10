@@ -587,6 +587,7 @@ class ComposerStaticInit2da8d90aadda2e3fc5eb0b3c38aea4b5
         'App\\Http\\Resources\\Category' => __DIR__ . '/../..' . '/app/Http/Resources/Category.php',
         'App\\Http\\Resources\\Subcategory' => __DIR__ . '/../..' . '/app/Http/Resources/Subcategory.php',
         'App\\Http\\Resources\\User' => __DIR__ . '/../..' . '/app/Http/Resources/User.php',
+        'App\\Http\\Resources\\UserSimple' => __DIR__ . '/../..' . '/app/Http/Resources/UserSimple.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

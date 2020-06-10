@@ -43,4 +43,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Card::class)
             ->withPivot(['qty']);
     }
+
+    public function offers()
+    {
+        return $this->belongsToMany(Offer::class);
+    }
 }

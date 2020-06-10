@@ -28,6 +28,7 @@ return array(
     'App\\Http\\Resources\\Category' => $baseDir . '/app/Http/Resources/Category.php',
     'App\\Http\\Resources\\Subcategory' => $baseDir . '/app/Http/Resources/Subcategory.php',
     'App\\Http\\Resources\\User' => $baseDir . '/app/Http/Resources/User.php',
+    'App\\Http\\Resources\\UserSimple' => $baseDir . '/app/Http/Resources/UserSimple.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

@@ -24,4 +24,12 @@ class Card extends Model
         return $this->belongsToMany(User::class)
             ->withPivot(['qty']);
     }
+
+    public function offers_wanted(){
+        return $this->belongsToMany(Offer::class, 'offers', 'card_wanted', 'id');
+    }
+
+    public function offers_offered() {
+        return $this->belongsToMany(Offer::class, 'offers', 'card_offered', 'id');
+    }
 }

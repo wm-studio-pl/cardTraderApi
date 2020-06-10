@@ -23,18 +23,23 @@ Route::post('login', 'API\UserController@login')->name('login');
 Route::post('users/register', 'API\UserController@register');
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('users/details', 'API\UserController@details');
+    Route::post('users/details', 'API\UserController@details');
     Route::put('users/cards/add/{id}', 'API\UserController@addCard');
     Route::put('users/cards/sub/{id}', 'API\UserController@subCard');
 
     Route::post('categories', 'API\CategoryController@store'); //new category
-    Route::put('categories', 'API\CategoryController@store'); //edit->save category
-    Route::delete('categories/{id}', 'API\CategoryController@destroy'); //delete category
-    Route::post('subcategories', 'API\SubcategoryController@store'); //new subcategory
-    Route::put('subcategories', 'API\SubcategoryController@store'); //edit->save subcategory
-    Route::delete('subcategories/{id}', 'API\SubcategoryController@destroy'); //delete subcategory
-    Route::post('cards', 'API\CardController@store'); //new card
-    Route::put('cards', 'API\CardController@store'); //edit->save card
-    Route::delete('cards/{id}', 'API\CardController@destroy'); //delete card
+//    Route::put('categories', 'API\CategoryController@store'); //edit->save category
+//    Route::delete('categories/{id}', 'API\CategoryController@destroy'); //delete category
+//    Route::post('subcategories', 'API\SubcategoryController@store'); //new subcategory
+//    Route::put('subcategories', 'API\SubcategoryController@store'); //edit->save subcategory
+//    Route::delete('subcategories/{id}', 'API\SubcategoryController@destroy'); //delete subcategory
+//    Route::post('cards', 'API\CardController@store'); //new card
+//    Route::put('cards', 'API\CardController@store'); //edit->save card
+//    Route::delete('cards/{id}', 'API\CardController@destroy'); //delete card
+    Route::post('offers', 'API\OfferController@store'); //new offer
+    Route::put('offers', 'API\OfferController@store'); //edit->save offer
+    Route::delete('offers/{id}', 'API\OfferController@destroy'); //delete/deactivate offer
+    Route::put('offers/accept/{id}', 'API\OfferController@accept'); //edit->save offer
 });
 Route::any('test', 'API\UserController@test');
 
@@ -51,6 +56,13 @@ Route::get('cards/{id}', 'API\CardController@show');
 Route::get('cards/u/{user_id}', 'API\CardController@showUserCards');
 Route::get('cards/c/{category_id}', 'API\CardController@showInCategory');
 Route::get('cards/{category_id}/{subcategory_id}', 'API\CardController@showInCategory');
+
+Route::get('offers', 'API\OfferController@index');
+Route::get('offers/{id}', 'API\OfferController@show');
+Route::get('offers/card/{id}', 'API\OfferController@find');
+Route::get('offers/u/{id}', 'API\OfferController@find');
+Route::get('offers/cat/{id}', 'API\OfferController@find');
+Route::get('offers/{category_id}/{subcategory_id}', 'API\OfferController@find');
 
 
 
