@@ -27,6 +27,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //Schema::defaultStringLength(191); //for fix problem with strings too long in DB
-        Resource::withoutWrapping();//Objekty nieotoczone selektorem "data"
+        //Resource::withoutWrapping();//Objekty nieotoczone selektorem "data"
     }
 }
